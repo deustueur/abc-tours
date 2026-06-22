@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC Tours — Premium Private Inbound Tours, Sri Lanka</title>
+<meta name="description" content="Boutique destination management company offering premium private inbound tours across Sri Lanka. SLTDA licensed. Flawless execution guaranteed.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B1F3A;
+    --navy-deep: #060F1E;
+    --navy-mid: #112840;
+    --navy-light: #1E3A5A;
+    --gold: #C9A84C;
+    --gold-light: #E2C97A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --cream: #F5F0E8;
+    --cream-muted: #A8B8C8;
+    --slate: #7090A8;
+    --white: #ffffff;
+    --off-white: #F9F7F4;
+    --border: rgba(255,255,255,0.08);
+    --text-dark: #1A1A2E;
+    --text-mid: #4A5568;
+    --text-light: #718096;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--navy-deep);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    font-style: italic;
+  }
+  .logo span { color: var(--cream); font-style: normal; font-size: 13px; display: block; letter-spacing: 0.12em; font-family: Arial, sans-serif; font-weight: 400; margin-top: -2px; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a { color: var(--cream-muted); font-family: Arial, sans-serif; font-size: 13px; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: transparent;
+    border: 0.5px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 8px 20px;
+    border-radius: 2px;
+    font-size: 12px !important;
+    letter-spacing: 0.08em;
+    transition: background 0.2s, color 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--navy-deep) !important; }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--cream-muted); margin: 5px 0; transition: 0.3s; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-dim);
+    border: 0.5px solid var(--gold);
+    color: var(--gold);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    padding: 6px 16px;
+    border-radius: 1px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Georgia', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    color: var(--cream);
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 700px;
+    margin-bottom: 8px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: var(--cream-muted);
+    max-width: 520px;
+    margin: 20px 0 36px;
+    line-height: 1.75;
+    font-weight: 400;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--navy-deep);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 14px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-transform: uppercase;
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    padding: 14px 32px;
+    border-radius: 2px;
+    border: 0.5px solid rgba(245,240,232,0.3);
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    text-transform: uppercase;
+  }
+  .btn-outline:hover { border-color: var(--cream); color: var(--cream); }
+  .hero-rule {
+    margin-top: 64px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .hero-stat { }
+  .hero-stat-num { font-family: 'Georgia', serif; font-size: 28px; color: var(--gold); font-weight: 400; }
+  .hero-stat-label { font-family: Arial, sans-serif; font-size: 11px; color: var(--slate); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .hero-divider { width: 0.5px; height: 40px; background: var(--border); }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--navy-deep);
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    padding: 18px 24px;
+  }
+  .trust-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: var(--slate);
+    letter-spacing: 0.06em;
+  }
+  .trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  /* SECTIONS */
+  section { padding: 80px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .eyebrow {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+  .section-sub {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: var(--text-light);
+    max-width: 540px;
+    line-height: 1.7;
+  }
+  .section-title-white { color: var(--cream); }
+  .section-sub-white { color: var(--slate); }
+
+  /* TOURS */
+  .tours-bg { background: var(--off-white); }
+  .tours-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 16px; }
+  .tours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .tour-card {
+    background: var(--white);
+    border: 0.5px solid #E2DDD5;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tour-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(11,31,58,0.1); }
+  .tour-img {
+    height: 200px;
+    background: var(--navy-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .tour-img-label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: var(--slate);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .tour-img-accent {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+  .tour-body { padding: 24px; }
+  .tour-tag {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 0.5px solid rgba(201,168,76,0.3);
+    padding: 3px 10px;
+    border-radius: 1px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .tour-name {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  .tour-desc {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .tour-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 0.5px solid #E2DDD5;
+  }
+  .tour-price { font-family: Arial, sans-serif; font-size: 12px; color: var(--text-light); }
+  .tour-price strong { font-family: 'Georgia', serif; font-size: 18px; color: var(--text-dark); display: block; }
+  .tour-link {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--gold);
+    padding-bottom: 1px;
+    transition: color 0.2s;
+  }
+  .tour-link:hover { color: var(--navy); border-color: var(--navy); }
+
+  /* DESTINATIONS */
+  .dest-bg { background: var(--navy); }
+  .dest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); margin-top: 48px; border: 0.5px solid var(--border); }
+  .dest-card {
+    background: var(--navy-mid);
+    padding: 32px 24px;
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .dest-card:hover { background: var(--navy-light); }
+  .dest-num { font-family: 'Georgia', serif; font-size: 11px; color: var(--gold); opacity: 0.6; margin-bottom: 16px; font-style: italic; }
+  .dest-name { font-family: 'Georgia', serif; font-size: 20px; color: var(--cream); margin-bottom: 10px; font-weight: 400; }
+  .dest-desc { font-family: Arial, sans-serif; font-size: 13px; color: var(--slate); line-height: 1.6; }
+  .dest-line { width: 24px; height: 1px; background: var(--gold); margin-top: 20px; opacity: 0.5; }
+
+  /* PROCESS */
+  .process-bg { background: var(--off-white); }
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; margin-top: 48px; border: 0.5px solid #E2DDD5; }
+  .process-step {
+    padding: 32px 24px;
+    border-right: 0.5px solid #E2DDD5;
+    position: relative;
+  }
+  .process-step:last-child { border-right: none; }
+  .process-num {
+    font-family: 'Georgia', serif;
+    font-size: 36px;
+    color: #E2DDD5;
+    line-height: 1;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  .process-title { font-family: 'Georgia', serif; font-size: 16px; color: var(--text-dark); margin-bottom: 8px; font-weight: 400; }
+  .process-desc { font-family: Arial, sans-serif; font-size: 12px; color: var(--text-light); line-height: 1.6; }
+  .process-accent { width: 24px; height: 2px; background: var(--gold); margin-bottom: 16px; }
+
+  /* MICE */
+  .mice-bg { background: var(--navy-deep); }
+  .mice-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .mice-list { margin-top: 28px; list-style: none; }
+  .mice-list li {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: var(--slate);
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.5;
+  }
+  .mice-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .mice-img-block {
+    background: var(--navy-mid);
+    border: 0.5px solid var(--navy-light);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+  }
+  .mice-img-block span { font-family: Arial, sans-serif; font-size: 12px; color: var(--slate); letter-spacing: 0.08em; }
+
+  /* ABOUT */
+  .about-bg { background: var(--white); }
+  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-text p { font-family: Arial, sans-serif; font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; }
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 8px; }
+  .team-card { background: var(--navy); padding: 24px; border-radius: 2px; }
+  .team-name { font-family: 'Georgia', serif; font-size: 18px; color: var(--cream); margin-bottom: 4px; font-weight: 400; }
+  .team-role { font-family: Arial, sans-serif; font-size: 11px; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .team-contact { font-family: Arial, sans-serif; font-size: 12px; color: var(--slate); line-height: 1.8; }
+  .team-contact a { color: var(--slate); text-decoration: none; }
+  .team-contact a:hover { color: var(--gold); }
+
+  /* CONTACT */
+  .contact-bg { background: var(--navy); }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    background: rgba(255,255,255,0.05);
+    border: 0.5px solid var(--navy-light);
+    color: var(--cream);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 13px 16px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: var(--slate); }
+  .contact-form input:focus,
+  .contact-form select:focus,
+  .contact-form textarea:focus { border-color: var(--gold); }
+  .contact-form select { color: var(--slate); }
+  .contact-form select option { background: var(--navy-deep); color: var(--cream); }
+  .contact-form textarea { resize: vertical; min-height: 100px; }
+  .contact-details { margin-top: 28px; }
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .contact-detail:first-child { border-top: 0.5px solid var(--border); }
+  .contact-detail-icon { color: var(--gold); font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+  .contact-detail-label { font-family: Arial, sans-serif; font-size: 11px; color: var(--slate); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .contact-detail-value { font-family: Arial, sans-serif; font-size: 14px; color: var(--cream); }
+  .contact-detail-value a { color: var(--cream); text-decoration: none; }
+  .contact-detail-value a:hover { color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy-deep);
+    border-top: 0.5px solid var(--border);
+    padding: 28px 24px;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-copy { font-family: Arial, sans-serif; font-size: 12px; color: var(--slate); }
+  .footer-badge {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: var(--slate);
+    border: 0.5px solid var(--navy-light);
+    padding: 5px 12px;
+    border-radius: 1px;
+    letter-spacing: 0.08em;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-family: Arial, sans-serif; font-size: 12px; color: var(--slate); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--navy-deep); padding: 20px 24px; gap: 20px; border-bottom: 0.5px solid var(--border); z-index: 99; }
+    .nav-toggle { display: block; }
+    .hero { min-height: auto; padding: 60px 24px 48px; }
+    .hero-rule { gap: 28px; }
+    .hero-divider { display: none; }
+    .mice-inner, .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .mice-img-block { display: none; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-step { border-bottom: 0.5px solid #E2DDD5; }
+    .team-grid { grid-template-columns: 1fr; }
+    .tours-header { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 56px 20px; }
+    .process-grid { grid-template-columns: 1fr; }
+    .dest-grid { grid-template-columns: 1fr; }
+    .nav-inner { padding: 0 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tour-card { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">ABC Tours <span>Sri Lanka</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#tours">Tours</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#mice">MICE</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Enquire now</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">SLTDA Licensed &nbsp;·&nbsp; Sri Lanka DMC</div>
+    <h1>Premium Private Inbound Tours.<br><em>Flawless Execution.</em></h1>
+    <p class="hero-sub">Boutique destination management for discerning travellers. Every itinerary is private, chauffeured, and personally managed — from the moment you land to the moment you depart.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">Plan my journey</a>
+      <a href="#tours" class="btn-outline">View our tours</a>
+    </div>
+    <div class="hero-rule">
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Private tours</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5★</div>
+        <div class="hero-stat-label">Client experience</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">24/7</div>
+        <div class="hero-stat-label">In-country support</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">SLTDA</div>
+        <div class="hero-stat-label">Licensed operator</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><div class="trust-dot"></div> Fully private itineraries</div>
+    <div class="trust-item"><div class="trust-dot"></div> Dedicated chauffeur-guide</div>
+    <div class="trust-item"><div class="trust-dot"></div> Handpicked 4 & 5-star hotels</div>
+    <div class="trust-item"><div class="trust-dot"></div> VIP airport arrival</div>
+    <div class="trust-item"><div class="trust-dot"></div> No call centres — speak directly with Trevin or Sajan</div>
+  </div>
+</div>
+
+<!-- TOURS -->
+<section class="tours-bg" id="tours">
+  <div class="section-inner">
+    <div class="tours-header">
+      <div>
+        <div class="eyebrow">Signature itineraries</div>
+        <h2 class="section-title">Private tours, built around you</h2>
+        <p class="section-sub">We do not operate group tours or fixed departure dates. Every journey is custom-designed for your travel style, pace, and preferences.</p>
+      </div>
+    </div>
+    <div class="tours-grid">
+      <div class="tour-card">
+        <div class="tour-img">
+          <span class="tour-img-label">Cultural Triangle</span>
+          <div class="tour-img-accent"></div>
+        </div>
+        <div class="tour-body">
+          <span class="tour-tag">Cultural · Heritage</span>
+          <h3 class="tour-name">The Cultural Immersion</h3>
+          <p class="tour-desc">Deep historical immersion across Sri Lanka's ancient heartland — Sigiriya Rock Fortress, the cave temples of Dambulla, sacred Kandy, and the colonial streets of Galle. A private chauffeur-guide accompanies you throughout.</p>
+          <div class="tour-footer">
+            <div class="tour-price">
+              <span>From</span>
+              <strong>USD 3,000</strong>
+              <span>2 pax · 10 days · private</span>
+            </div>
+            <a href="#contact" class="tour-link">Enquire →</a>
+          </div>
+        </div>
+      </div>
+      <div class="tour-card">
+        <div class="tour-img">
+          <span class="tour-img-label">South Coast</span>
+          <div class="tour-img-accent"></div>
+        </div>
+        <div class="tour-body">
+          <span class="tour-tag">Luxury · Beach</span>
+          <h3 class="tour-name">Southern Luxury Circuit</h3>
+          <p class="tour-desc">Luxury villa retreats along the southern coastline — colonial Galle Fort, whale watching off Mirissa, and the secluded beaches of Tangalle. Premium 5-star accommodation and private transfers throughout.</p>
+          <div class="tour-footer">
+            <div class="tour-price">
+              <span>Fully</span>
+              <strong>Custom</strong>
+              <span>Tailored to your group</span>
+            </div>
+            <a href="#contact" class="tour-link">Enquire →</a>
+          </div>
+        </div>
+      </div>
+      <div class="tour-card">
+        <div class="tour-img">
+          <span class="tour-img-label">Hill Country</span>
+          <div class="tour-img-accent"></div>
+        </div>
+        <div class="tour-body">
+          <span class="tour-tag">Scenic · Nature</span>
+          <h3 class="tour-name">Hill Country Escape</h3>
+          <p class="tour-desc">Cool misty highlands, endless tea estates, and scenic rail journeys through Kandy, Nuwara Eliya, and Ella. A complete contrast to the coast — unhurried, elevated, and extraordinarily beautiful.</p>
+          <div class="tour-footer">
+            <div class="tour-price">
+              <span>Fully</span>
+              <strong>Custom</strong>
+              <span>Tailored to your group</span>
+            </div>
+            <a href="#contact" class="tour-link">Enquire →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="dest-bg" id="destinations">
+  <div class="section-inner">
+    <div class="eyebrow">Where we take you</div>
+    <h2 class="section-title section-title-white">Sri Lanka, in full</h2>
+    <p class="section-sub section-sub-white">We cover every key corridor of the island — and know precisely when to pivot east as the monsoon shifts.</p>
+    <div class="dest-grid">
+      <div class="dest-card">
+        <div class="dest-num">01</div>
+        <h3 class="dest-name">Cultural Triangle</h3>
+        <p class="dest-desc">Ancient cities, towering rock fortresses, and UNESCO cave temples. The historical soul of Sri Lanka — Sigiriya, Dambulla, Anuradhapura.</p>
+        <div class="dest-line"></div>
+      </div>
+      <div class="dest-card">
+        <div class="dest-num">02</div>
+        <h3 class="dest-name">Hill Country</h3>
+        <p class="dest-desc">Cooler altitudes, mist-draped tea estates, and some of the world's most scenic rail routes through Kandy, Nuwara Eliya, and Ella.</p>
+        <div class="dest-line"></div>
+      </div>
+      <div class="dest-card">
+        <div class="dest-num">03</div>
+        <h3 class="dest-name">South Coast</h3>
+        <p class="dest-desc">Premium beach luxury, whale watching off Mirissa, and colonial Dutch architecture in Galle Fort. Private villa retreats along Tangalle.</p>
+        <div class="dest-line"></div>
+      </div>
+      <div class="dest-card">
+        <div class="dest-num">04</div>
+        <h3 class="dest-name">East Coast</h3>
+        <p class="dest-desc">Pristine, sun-drenched beaches at Trincomalee, Arugam Bay, and Pasikudah — our perfect dry-season pivot during the southwest monsoon.</p>
+        <div class="dest-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-bg">
+  <div class="section-inner">
+    <div class="eyebrow">How it works</div>
+    <h2 class="section-title">From enquiry to arrival — five steps</h2>
+    <p class="section-sub">No middlemen, no automated responses. You speak directly with us from day one.</p>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div class="process-accent"></div>
+        <h3 class="process-title">Enquiry & consultation</h3>
+        <p class="process-desc">Direct contact with Trevin or Sajan to outline your perfect trip — travel dates, interests, group size, and budget.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div class="process-accent"></div>
+        <h3 class="process-title">Custom itinerary & quote</h3>
+        <p class="process-desc">A fast, fully personalised itinerary with handpicked hotels from our pre-secured allotments and transparent pricing.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div class="process-accent"></div>
+        <h3 class="process-title">Confirmation</h3>
+        <p class="process-desc">Secure your tour with a 20–30% non-refundable deposit. Your chauffeur-guide and hotels are locked in immediately.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <div class="process-accent"></div>
+        <h3 class="process-title">VIP arrival</h3>
+        <p class="process-desc">A flawless handover at Bandaranaike International Airport — iPad name board, welcome briefing, SIM card, and warm introduction to your guide.</p>
+      </div>
+      <div class="process-step" style="border-right: none;">
+        <div class="process-num">05</div>
+        <div class="process-accent"></div>
+        <h3 class="process-title">Flawless execution</h3>
+        <p class="process-desc">24/7 in-country support and incident protocols throughout your journey. We are always reachable — no exceptions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MICE -->
+<section class="mice-bg" id="mice">
+  <div class="section-inner">
+    <div class="mice-inner">
+      <div>
+        <div class="eyebrow">Corporate & events</div>
+        <h2 class="section-title section-title-white">MICE — Meetings, Incentives, Conferences & Exhibitions</h2>
+        <p class="section-sub section-sub-white">We manage end-to-end corporate events and incentive programmes across Sri Lanka. From intimate executive retreats to large-scale incentive groups.</p>
+        <ul class="mice-list">
+          <li>Venue sourcing and negotiation across 4 and 5-star properties</li>
+          <li>Private transfers, airport logistics, and ground coordination</li>
+          <li>Tailored team-building and cultural experience programmes</li>
+          <li>Dedicated event manager on the ground throughout</li>
+          <li>Full F&B coordination, AV, and technical requirements</li>
+          <li>24/7 incident support and contingency planning</li>
+        </ul>
+        <br>
+        <a href="#contact" class="btn-gold">Discuss your event</a>
+      </div>
+      <div class="mice-img-block">
+        <span>[ MICE event photography ]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-bg" id="about">
+  <div class="section-inner">
+    <div class="about-inner">
+      <div class="about-text">
+        <div class="eyebrow">Who we are</div>
+        <h2 class="section-title">Boutique DMC, built on a different standard</h2>
+        <p>We are not a mass-market operator. We do not compete on price, and we do not run group tours. ABC Tours was built on a single conviction: that discerning travellers deserve a level of attention and execution that large-volume DMCs simply cannot provide.</p>
+        <p>Every tour we manage is private. Every guest has a dedicated chauffeur-guide. Every itinerary is designed from scratch. We are fully licensed under the Sri Lanka Tourism Development Authority (SLTDA) and operate to a standard that we are personally accountable for — because when you call, it is Trevin or Sajan who answers.</p>
+        <p>Our benchmark is a USD 3,000 private 10-day itinerary for two passengers — and everything we do is measured against that promise of value and quality.</p>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom: 20px;">The team</div>
+        <div class="team-grid">
+          <div class="team-card">
+            <h3 class="team-name">Sajan Alwis</h3>
+            <div class="team-role">Founder & CEO</div>
+            <div class="team-contact">
+              <a href="tel:+94775329297">+94 77 532 9297</a><br>
+              <a href="mailto:sajanalwis1999@gmail.com">sajanalwis1999@gmail.com</a>
+            </div>
+          </div>
+          <div class="team-card">
+            <h3 class="team-name">Trevin Glen</h3>
+            <div class="team-role">Co-Chair · Operations & BD</div>
+            <div class="team-contact">
+              <a href="tel:+94701610074">+94 70 161 0074</a><br>
+              <a href="mailto:deustueurtrevin@gmail.com">deustueurtrevin@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-bg" id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div>
+        <div class="eyebrow">Get in touch</div>
+        <h2 class="section-title section-title-white">Plan your Sri Lanka journey</h2>
+        <p class="section-sub section-sub-white">Tell us what you have in mind. We will come back to you within 24 hours with a tailored proposal.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✆</div>
+            <div>
+              <div class="contact-detail-label">WhatsApp · Trevin</div>
+              <div class="contact-detail-value"><a href="https://wa.me/94701610074">+94 70 161 0074</a></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✆</div>
+            <div>
+              <div class="contact-detail-label">WhatsApp · Sajan</div>
+              <div class="contact-detail-value"><a href="https://wa.me/94775329297">+94 77 532 9297</a></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✉</div>
+            <div>
+              <div class="contact-detail-label">Email</div>
+              <div class="contact-detail-value"><a href="mailto:deustueurtrevin@gmail.com">deustueurtrevin@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">◉</div>
+            <div>
+              <div class="contact-detail-label">Base</div>
+              <div class="contact-detail-value">Colombo, Sri Lanka</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="text" name="name" placeholder="Your full name" required>
+          <input type="email" name="email" placeholder="Email address" required>
+          <input type="tel" name="phone" placeholder="Phone / WhatsApp number">
+          <select name="tour_type">
+            <option value="" disabled selected>Type of tour</option>
+            <option>Cultural immersion</option>
+            <option>Southern luxury circuit</option>
+            <option>Hill country escape</option>
+            <option>East coast</option>
+            <option>MICE / corporate event</option>
+            <option>Fully custom itinerary</option>
+          </select>
+          <input type="text" name="travel_dates" placeholder="Approximate travel dates">
+          <input type="number" name="pax" placeholder="Number of travellers" min="1">
+          <textarea name="message" placeholder="Tell us about your ideal trip — interests, pace, special requests..."></textarea>
+          <button type="submit" class="btn-gold" style="font-size:13px; cursor:pointer; border:none;">Send enquiry →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 ABC Tours. All rights reserved.</span>
+    <span class="footer-badge">SLTDA Licensed Operator</span>
+    <div class="footer-links">
+      <a href="#">Privacy policy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+
+</body>
+</html>
