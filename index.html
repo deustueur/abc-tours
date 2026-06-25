@@ -567,7 +567,7 @@ At Walkers Tours, we take care of every detail, ensuring a hassle-free journey s
         <span>X</span>
     </div>
 </div>
-<section class="position-relative overflow-hidden banner-section " style="background: none !important; min-height: 100vh !important;">
+<section class="position-relative overflow-hidden banner-section " style="background: linear-gradient(90deg, rgb(245, 200, 0) 0%, rgb(24, 48, 129) 100%) !important; min-height: 100vh !important;">
         
         <div data-rocket-location-hash="e042eac07dc87deb47a2d081a6206eac" class="hm-banner-text">
         <span class=" heading--60 mobile-text-center tab-text-center span-font-weight--600 span-padding-left center-title font-weight--300 font-color--white padding-bottom--10">Chalo Colombo, Haalo Sri Lanka</span>
@@ -3706,21 +3706,14 @@ var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   
 <script>
-  window.addEventListener('DOMContentLoaded', function() {
-    if (window.jQuery && jQuery.fn.slick) {
-      const originalSlick = jQuery.fn.slick;
-      jQuery.fn.slick = function() {
-        try {
-          return originalSlick.apply(this, arguments);
-        } catch(e) {
-          console.warn('🛡️ Slick crash prevented on:', this, e);
-          return this;
-        }
-      };
-    }
-  });
+  if (window.jQuery && jQuery.fn.slick) {
+    var originalSlick = jQuery.fn.slick;
+    jQuery.fn.slick = function() {
+      try { return originalSlick.apply(this, arguments); }
+      catch(e) { console.warn('🛡️ Slick crash prevented'); return this; }
+    };
+  }
 </script>
-
   <script type="text/javascript" id="main-js-js" data-rocket-defer="" defer="" src="./index_files/main.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="gsap-js-js" data-rocket-defer="" defer="" src="./index_files/gsap.min.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="scroll-js-js" data-rocket-defer="" defer="" src="./index_files/ScrollTrigger.min.js.download" data-rocket-status="executed"></script>
