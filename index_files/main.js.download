@@ -418,7 +418,7 @@ jQuery(document).ready(function ($) {
   $(window).on("resize", function () {
     if (window.innerWidth < 1025) {
       //slick slider
-      jQuery(".package-list").slick({
+      jQuery('.package-list-zombie-dead').slick({
         slidesToShow: 2,
         slidesToScroll: 1,
         arrows: true,
@@ -459,7 +459,7 @@ jQuery(document).ready(function ($) {
   });
   if (window.innerWidth < 1025) {
     //slick slider
-    jQuery(".package-list").slick({
+    jQuery('.package-list-zombie-dead').slick({
       slidesToShow: 2,
       slidesToScroll: 1,
       arrows: true,
