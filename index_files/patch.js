@@ -223,3 +223,88 @@
     setTimeout(applyBlogGridFix, 800);
   });
 })();
+
+
+// ─── BLOCK 4: HEADER SCROLL STATE FIX ───────────────────────────────────────
+(function() {
+  function fixHeader() {
+    var header = document.querySelector('header.header');
+    if (!header) return;
+    header.classList.remove('header-scrolled');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 100) header.classList.add('header-scrolled');
+      else header.classList.remove('header-scrolled');
+    }, { passive: true });
+    console.log('✅ patch.js: header scroll fixed');
+  }
+  window.addEventListener('load', function() { setTimeout(fixHeader, 100); });
+})();
+
+
+// ─── BLOCK 5: SECTION BACKGROUND GRADIENTS ───────────────────────────────────
+(function() {
+  var gradient = 'linear-gradient(90deg, hsla(49, 100%, 48%, 1) 0%, hsla(226, 69%, 30%, 1) 100%)';
+
+  function findByHeading(text) {
+    var headings = document.querySelectorAll('h1,h2,h3,h4');
+    for (var i = 0; i < headings.length; i++) {
+      if (headings[i].textContent.trim().includes(text)) {
+        var el = headings[i].parentElement;
+        while (el && el.tagName !== 'SECTION' && el.tagName !== 'HEADER' && el.tagName !== 'FOOTER') {
+          el = el.parentElement;
+        }
+        return el;
+      }
+    }
+    return null;
+  }
+
+  function applyGradients() {
+    // Hero
+    var hero = document.querySelector('section.banner-section');
+    if (hero) {
+      hero.querySelectorAll('video, .video-container, .video-poster, div[class*="video"]').forEach(function(v) {
+        v.style.setProperty('display', 'none', 'important');
+        v.style.setProperty('opacity', '0', 'important');
+      });
+      hero.style.setProperty('background', gradient, 'important');
+      hero.style.setProperty('min-height', '100vh', 'important');
+    }
+
+    // Class-based sections
+    var classTargets = [
+      'section.bg-color--light-blue',
+      'section.image-content-sec',
+      'section.padding-left--5perc',
+      'section.bg-color--dark-green',
+      'section.faq-sec',
+    ];
+    classTargets.forEach(function(sel) {
+      var el = document.querySelector(sel);
+      if (el) el.style.setProperty('background', gradient, 'important');
+    });
+
+    // Heading-based sections
+    var headingTargets = [
+      'Leading Destination',
+      'Why Book',
+      'Symphony',
+      'LatestNews',
+      'Accolades',
+      'Journey of Excellence',
+    ];
+    headingTargets.forEach(function(text) {
+      var el = findByHeading(text);
+      if (el) el.style.setProperty('background', gradient, 'important');
+    });
+
+    console.log('✅ patch.js: section gradients applied');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyGradients);
+  } else {
+    applyGradients();
+  }
+  window.addEventListener('load', function() { setTimeout(applyGradients, 400); });
+})();
