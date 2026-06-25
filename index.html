@@ -3704,6 +3704,23 @@ var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$
 <script type="text/javascript" id="slick-js-js" data-rocket-defer="" defer="" src="./index_files/slick.min.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="loco-js-js" data-rocket-defer="" defer="" src="./index_files/locomotive-scroll.min.js.download" data-rocket-status="executed"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    if (window.jQuery && jQuery.fn.slick) {
+      const originalSlick = jQuery.fn.slick;
+      jQuery.fn.slick = function() {
+        try {
+          return originalSlick.apply(this, arguments);
+        } catch(e) {
+          console.warn('🛡️ Slick crash prevented on:', this, e);
+          return this;
+        }
+      };
+    }
+  });
+</script>
+
   <script type="text/javascript" id="main-js-js" data-rocket-defer="" defer="" src="./index_files/main.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="gsap-js-js" data-rocket-defer="" defer="" src="./index_files/gsap.min.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="scroll-js-js" data-rocket-defer="" defer="" src="./index_files/ScrollTrigger.min.js.download" data-rocket-status="executed"></script>
