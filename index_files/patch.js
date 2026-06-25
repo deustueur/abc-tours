@@ -1,5 +1,6 @@
+// patch.js — lazy image fix + package-list grid fix
 
-// patch.js — lazy image fix, runs after main.js
+// ─── BLOCK 1: LAZY IMAGE FIX (unchanged) ─────────────────────────────────────
 (function() {
   const patches = {
     'Hill Country Tours': 'https://walkerstours.eme-devops.com/2025/09/main-listing-page-features-4.jpg?w=465&h=550&fit=crop&fit=crop&crop=center&auto=format,compress,enhance&q=80',
@@ -10,7 +11,9 @@
     'The Cultural Odyssey': 'https://walkerstours.eme-devops.com/2025/09/Culture-04-scaled.jpg?w=465&h=550&fit=crop&fit=crop&crop=center&auto=format,compress,enhance&q=80',
     'Wander & Awaken': 'https://walkerstours.eme-devops.com/2025/09/Ayurevedic-05-scaled.jpg?w=465&h=550&fit=crop&fit=crop&crop=center&auto=format,compress,enhance&q=80',
     'Adventure, Culture & love': 'https://walkerstours.eme-devops.com/2025/09/Adventure-scaled.jpg?w=465&h=550&fit=crop&fit=crop&crop=center&auto=format,compress,enhance&q=80',
-    'Deep Dive into the Wild': 'https://walkerstours.eme-devops.com/2025/09/Wildlife-01.jpg?w=465&h=550&fit=crop&fit=crop&crop=center&auto=format,compress,enhance&q=80',
+    'Deep Dive into the Wild': 'https://walkerstours.eme-devops.com/2025/09/Wildlife-01.jpg?w=465&h=550&fit=crop&fit=crop&crop=right&auto=format,compress,enhance&q=50',
+    'A quick escape to the Hills': 'https://walkerstours.eme-devops.com/2025/09/Ella-1.jpg?w=465&h=550&fit=crop&fit=crop&crop=right&auto=format,compress,enhance&q=50',
+    'Family Escapade in Paradise': 'https://walkerstours.eme-devops.com/2025/09/Safari-02-scaled.jpg?w=465&h=550&fit=crop&fit=crop&crop=center&auto=format,compress,enhance&q=50',
   };
 
   function applyPatches() {
@@ -26,27 +29,164 @@
     });
   }
 
-  // Run on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', applyPatches);
   } else {
     applyPatches();
   }
-
-  // Also run after slick initializes (500ms delay)
   setTimeout(applyPatches, 500);
-
-  // And again after full page load
   window.addEventListener('load', function() {
     setTimeout(applyPatches, 300);
   });
 
-  // Watch for slick reinit via MutationObserver
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(m) {
       if (m.addedNodes.length) applyPatches();
     });
   });
   observer.observe(document.body, { childList: true, subtree: true });
+})();
 
+
+// ─── BLOCK 2: PACKAGE-LIST GRID FIX ──────────────────────────────────────────
+// Runs after window load + 800ms delay so slick has fully settled.
+// Kills slick on .package-list, rewrites clean 6-item grid, injects CSS fix.
+(function() {
+  function applyPackageListFix() {
+    var container = document.querySelector('.package-list');
+    if (!container) return;
+
+    // Already patched — don't run twice
+    if (container.getAttribute('data-patched') === 'true') return;
+
+    // Kill slick if initialized
+    try {
+      if (window.jQuery && jQuery(container).hasClass('slick-initialized')) {
+        jQuery(container).slick('unslick');
+      }
+    } catch(e) {}
+
+    // Wipe slick classes
+    container.className = 'package-list';
+
+    // Inject clean 6-item grid HTML
+    container.innerHTML = [
+      '<div class="list-item featured-list-item-wrap">',
+        '<div class="featured-list-item position-relative">',
+          '<a href="#" class="hover-box d-block" title="View Deep Dive into the Wild">',
+            '<picture>',
+              '<img class="w-100 hover-box__img" src="https://walkerstours.eme-devops.com/2025/09/Wildlife-01.jpg?w=465&h=550&fit=crop&crop=right&auto=format,compress,enhance&q=50" alt="Deep Dive into the Wild">',
+            '</picture>',
+            '<div class="hover-box__details">',
+              '<div class="hover-box__details_visible">',
+                '<p class="all-caps m-0 paragraph--14 font-color--white font-weight--500">Wildlife Tours</p>',
+                '<p class="heading--24 font-weight--600 font-color--white all-caps para--white-line">Deep Dive into the Wild</p>',
+                '<p class="paragraph--20 font-color--white font-weight--300 padding-bottom--20 m-0">16 Nights &amp; 17 Days</p>',
+              '</div>',
+            '</div>',
+            '<div class="featured-text">',
+              '<p class="m-0 all-caps font-weight--600 heading--22 font-color--white">Most Popular Tour</p>',
+            '</div>',
+          '</a>',
+        '</div>',
+      '</div>',
+
+      '<div class="list-item">',
+        '<a href="#" class="hover-box d-block" title="View A quick escape to the Hills">',
+          '<picture>',
+            '<img class="w-100 hover-box__img" src="https://walkerstours.eme-devops.com/2025/09/Ella-1.jpg?w=465&h=550&fit=crop&crop=right&auto=format,compress,enhance&q=50" alt="A quick escape to the Hills">',
+          '</picture>',
+          '<div class="hover-box__details">',
+            '<div class="hover-box__details_visible">',
+              '<p class="all-caps m-0 paragraph--14 font-color--white font-weight--500">Hill Country Tours</p>',
+              '<p class="heading--24 font-weight--600 font-color--white all-caps para--white-line">A quick escape to the Hills</p>',
+              '<p class="paragraph--20 font-color--white font-weight--300 padding-bottom--20 m-0">08 Nights &amp; 09 Days</p>',
+            '</div>',
+          '</div>',
+        '</a>',
+      '</div>',
+
+      '<div class="list-item">',
+        '<a href="#" class="hover-box d-block" title="View Family Escapade in Paradise">',
+          '<picture>',
+            '<img class="w-100 hover-box__img" src="https://walkerstours.eme-devops.com/2025/09/Safari-02-scaled.jpg?w=465&h=550&fit=crop&crop=center&auto=format,compress,enhance&q=50" alt="Family Escapade in Paradise">',
+          '</picture>',
+          '<div class="hover-box__details">',
+            '<div class="hover-box__details_visible">',
+              '<p class="all-caps m-0 paragraph--14 font-color--white font-weight--500">Family Tours</p>',
+              '<p class="heading--24 font-weight--600 font-color--white all-caps para--white-line">Family Escapade in Paradise</p>',
+              '<p class="paragraph--20 font-color--white font-weight--300 padding-bottom--20 m-0">18 Nights &amp; 19 Days</p>',
+            '</div>',
+          '</div>',
+        '</a>',
+      '</div>',
+
+      '<div class="list-item">',
+        '<a href="#" class="hover-box d-block" title="View The Cultural Odyssey">',
+          '<picture>',
+            '<img class="w-100 hover-box__img" src="https://walkerstours.eme-devops.com/2025/09/Culture-04-scaled.jpg?w=465&h=550&fit=crop&crop=center&auto=format,compress,enhance&q=50" alt="The Cultural Odyssey">',
+          '</picture>',
+          '<div class="hover-box__details">',
+            '<div class="hover-box__details_visible">',
+              '<p class="all-caps m-0 paragraph--14 font-color--white font-weight--500">Cultural Tours</p>',
+              '<p class="heading--24 font-weight--600 font-color--white all-caps para--white-line">The Cultural Odyssey</p>',
+              '<p class="paragraph--20 font-color--white font-weight--300 padding-bottom--20 m-0">08 Nights &amp; 09 Days</p>',
+            '</div>',
+          '</div>',
+        '</a>',
+      '</div>',
+
+      '<div class="list-item">',
+        '<a href="#" class="hover-box d-block" title="View Wander &amp; Awaken">',
+          '<picture>',
+            '<img class="w-100 hover-box__img" src="https://walkerstours.eme-devops.com/2025/09/Ayurevedic-05-scaled.jpg?w=465&h=550&fit=crop&crop=center&auto=format,compress,enhance&q=50" alt="Wander &amp; Awaken">',
+          '</picture>',
+          '<div class="hover-box__details">',
+            '<div class="hover-box__details_visible">',
+              '<p class="all-caps m-0 paragraph--14 font-color--white font-weight--500">Ayurvedic Tours</p>',
+              '<p class="heading--24 font-weight--600 font-color--white all-caps para--white-line">Wander &amp; Awaken</p>',
+              '<p class="paragraph--20 font-color--white font-weight--300 padding-bottom--20 m-0">10 Nights &amp; 11 Days</p>',
+            '</div>',
+          '</div>',
+        '</a>',
+      '</div>',
+
+      '<div class="list-item">',
+        '<a href="#" class="hover-box d-block" title="View Adventure, Culture &amp; love">',
+          '<picture>',
+            '<img class="w-100 hover-box__img" src="https://walkerstours.eme-devops.com/2025/09/Adventure-scaled.jpg?w=465&h=550&fit=crop&crop=center&auto=format,compress,enhance&q=50" alt="Adventure, Culture &amp; love">',
+          '</picture>',
+          '<div class="hover-box__details">',
+            '<div class="hover-box__details_visible">',
+              '<p class="all-caps m-0 paragraph--14 font-color--white font-weight--500">Honeymoon Tours</p>',
+              '<p class="heading--24 font-weight--600 font-color--white all-caps para--white-line">Adventure, Culture &amp; love</p>',
+              '<p class="paragraph--20 font-color--white font-weight--300 padding-bottom--20 m-0">16 Nights &amp; 17 Days</p>',
+            '</div>',
+          '</div>',
+        '</a>',
+      '</div>'
+    ].join('');
+
+    // CSS anti-clip patch
+    if (document.getElementById('anti-clip-patch')) {
+      document.getElementById('anti-clip-patch').remove();
+    }
+    var style = document.createElement('style');
+    style.id = 'anti-clip-patch';
+    style.innerHTML = [
+      '.package-list .hover-box__details { bottom: 15px !important; }',
+      '.package-list .hover-box__details_visible { padding-bottom: 15px !important; }',
+      '.package-list .hover-box { min-height: 100% !important; height: auto !important; }'
+    ].join(' ');
+    document.head.appendChild(style);
+
+    // Mark as patched so MutationObserver doesn't re-trigger
+    container.setAttribute('data-patched', 'true');
+    console.log('✅ patch.js: package-list grid applied');
+  }
+
+  // Fire after full load + 800ms — replicates manual console timing
+  window.addEventListener('load', function() {
+    setTimeout(applyPackageListFix, 800);
+  });
 })();
