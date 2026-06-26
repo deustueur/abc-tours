@@ -3760,6 +3760,15 @@ var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$
     dotsStyle.innerHTML = '.one-item-slider .slick-dots { pointer-events:none; opacity:0; visibility:hidden; }';
     document.head.appendChild(dotsStyle);
 
+    // Reset all sliders to slide 0 after reinit
+    setTimeout(function() {
+      document.querySelectorAll('.slick-initialized').forEach(function(el) {
+        try {
+          jQuery(el).slick('slickGoTo', 0, true);
+        } catch(e) {}
+      });
+      console.log('✅ Strip: all sliders reset to slide 0');
+    }, 100);
     window.__slickStripped = true;
     console.log('✅ Strip: reinit complete, double-init guard active');
   });
