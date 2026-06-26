@@ -3700,93 +3700,12 @@ var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$
 /* ]]> */
 </script>
 <script type="text/javascript" id="popper-js-js" data-rocket-defer="" defer="" src="./index_files/popper.min.js.download" data-rocket-status="executed"></script>
-<script type="text/javascript" id="bootstrap-js-js" data-rocket-defer="" defer="" src="./index_files/bootstrap.bundle.min.js.download" data-rocket-status="executed"></script>
-<script>
-(function() {
-  // Set flag immediately so patch.js Block 5 can check it
-  window.__slickStripped = false;
-
-  var initialized = document.querySelectorAll('.slick-initialized');
-  if (!initialized.length) return;
-
-  initialized.forEach(function(el) {
-    el.classList.remove('slick-initialized','slick-slider');
-    el.querySelectorAll('.slick-prev,.slick-next,.slick-dots').forEach(function(a){ a.remove(); });
-    var list = el.querySelector('.slick-list');
-    if (list) {
-      var track = list.querySelector('.slick-track');
-      if (track) {
-        Array.from(track.children)
-          .filter(function(c){ return !c.classList.contains('slick-cloned'); })
-          .forEach(function(slide){
-            slide.classList.remove('slick-slide','slick-current','slick-active','slick-visible','slick-cloned');
-            slide.removeAttribute('data-slick-index');
-            slide.removeAttribute('aria-hidden');
-            slide.removeAttribute('tabindex');
-            slide.removeAttribute('role');
-            slide.removeAttribute('aria-describedby');
-            slide.style.width = '';
-            el.appendChild(slide);
-          });
-      }
-      list.remove();
-    }
-  });
-  console.log('🧹 Strip: ' + initialized.length + ' containers cleaned');
-
-  // Intercept jQuery.fn.slick to prevent double-init crashes
-  // Fires before slick.min.js loads — wraps it the moment jQuery+Slick are ready
-  window.addEventListener('load', function() {
-    if (!window.jQuery || !jQuery.fn.slick) return;
-
-    var _originalSlick = jQuery.fn.slick;
-    jQuery.fn.slick = function(options) {
-      // If already initialized, skip silently
-      if (this.hasClass('slick-initialized')) {
-        console.log('🛡️ Strip: skipping already-initialized slider');
-        return this;
-      }
-      return _originalSlick.apply(this, arguments);
-    };
-
-    // Now do our own reinit
-    try { jQuery('.four-item-slider').slick({ slidesToShow:4, slidesToScroll:1, arrows:true, dots:false, infinite:true, responsive:[{breakpoint:1025,settings:{slidesToShow:2}},{breakpoint:600,settings:{slidesToShow:1}}] }); } catch(e) { console.warn('⚠️ four-item-slider:', e.message); }
-    try { jQuery('.three-item-slider').slick({ slidesToShow:3, slidesToScroll:1, arrows:true, dots:false, infinite:true, responsive:[{breakpoint:1025,settings:{slidesToShow:2}},{breakpoint:600,settings:{slidesToShow:1}}] }); } catch(e) { console.warn('⚠️ three-item-slider:', e.message); }
-    try { jQuery('.one-item-slider').slick({ slidesToShow:1, slidesToScroll:1, arrows:true, dots:true, infinite:true, autoplay:true, autoplaySpeed:4000 }); } catch(e) { console.warn('⚠️ one-item-slider:', e.message); }
-    try { jQuery('.seven-item-slider').slick({ slidesToShow:7, slidesToScroll:1, arrows:true, dots:false, infinite:true, autoplay:true, autoplaySpeed:2000, responsive:[{breakpoint:1025,settings:{slidesToShow:4}},{breakpoint:600,settings:{slidesToShow:2}}] }); } catch(e) { console.warn('⚠️ seven-item-slider:', e.message); }
-
-    // Dots fix
-    var dotsStyle = document.createElement('style');
-    dotsStyle.innerHTML = '.one-item-slider .slick-dots { pointer-events:none; opacity:0; visibility:hidden; }';
-    document.head.appendChild(dotsStyle);
-
-    // Reset all sliders to slide 0 after reinit
-    setTimeout(function() {
-      document.querySelectorAll('.slick-initialized').forEach(function(el) {
-        try {
-          jQuery(el).slick('slickGoTo', 0, true);
-        } catch(e) {}
-      });
-      console.log('✅ Strip: all sliders reset to slide 0');
-    }, 100);
-    window.__slickStripped = true;
-    console.log('✅ Strip: reinit complete, double-init guard active');
-  });
-})();
-</script>
+<script type="text/javascript" id="bootstrap-js-js" data-rocket-defer="" defer="" src="./index_files/bootstrap.bundle.min.js.download" data-rocket-status="executed"><
 <script type="text/javascript" id="slick-js-js" data-rocket-defer="" defer="" src="./index_files/slick.min.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="loco-js-js" data-rocket-defer="" defer="" src="./index_files/locomotive-scroll.min.js.download" data-rocket-status="executed"></script>
 
   
-<script>
-  if (window.jQuery && jQuery.fn.slick) {
-    var originalSlick = jQuery.fn.slick;
-    jQuery.fn.slick = function() {
-      try { return originalSlick.apply(this, arguments); }
-      catch(e) { console.warn('🛡️ Slick crash prevented'); return this; }
-    };
-  }
-</script>
+
   <script src="./index_files/patch.js"></script>
 <script type="text/javascript" id="main-js-js" data-rocket-defer="" defer="" src="./index_files/main.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="gsap-js-js" data-rocket-defer="" defer="" src="./index_files/gsap.min.js.download" data-rocket-status="executed"></script>
