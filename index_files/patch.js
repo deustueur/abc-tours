@@ -192,39 +192,6 @@
 })();
 
 
-// ─── BLOCK 3: BLOG-GRID SLICK FIX ────────────────────────────────────────────
-(function() {
-  function applyBlogGridFix() {
-    var grid = document.querySelector('.blog-grid');
-    if (!grid) return;
-    if (grid.getAttribute('data-patched') === 'true') return;
-
-    var originalSlides = Array.from(grid.querySelectorAll('.slick-slide:not(.slick-cloned)'));
-    if (originalSlides.length === 0) return;
-
-    var pureHTML = originalSlides.map(function(slide) {
-      var clone = slide.cloneNode(true);
-      clone.className = clone.className.replace(/slick-[^\s]+/g, '').trim();
-      clone.removeAttribute('data-slick-index');
-      clone.removeAttribute('id');
-      clone.removeAttribute('aria-hidden');
-      clone.removeAttribute('tabindex');
-      clone.style = '';
-      return clone.outerHTML;
-    }).join('');
-
-    grid.innerHTML = pureHTML;
-    grid.className = 'blog-grid';
-    grid.setAttribute('data-patched', 'true');
-    console.log('✅ patch.js: blog-grid rebuilt (' + originalSlides.length + ' articles)');
-  }
-
-  window.addEventListener('load', function() {
-    setTimeout(applyBlogGridFix, 800);
-  });
-})();
-
-
 // ─── BLOCK 4: HEADER SCROLL STATE FIX ───────────────────────────────────────
 (function() {
   function fixHeader() {
@@ -310,7 +277,7 @@
 })();
 
 
-// ─── BLOCK 5: SLICK FULL REINIT — strip baked state, reinit all sliders ──────
+// ─── BLOCK 6: SLICK FULL REINIT — strip baked state, reinit all sliders ──────
 (function() {
   function stripAndReinitSliders() {
 
