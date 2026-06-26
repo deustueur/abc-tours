@@ -308,3 +308,93 @@
   }
   window.addEventListener('load', function() { setTimeout(applyGradients, 400); });
 })();
+
+
+// ─── BLOCK 5: SLICK FULL REINIT — strip baked state, reinit all sliders ──────
+(function() {
+  function stripAndReinitSliders() {
+
+    // Strip all baked-in slick state from HTML snapshot
+    document.querySelectorAll('.slick-initialized').forEach(function(el) {
+      el.classList.remove('slick-initialized', 'slick-slider');
+      el.querySelectorAll('.slick-prev, .slick-next, .slick-dots').forEach(function(a) { a.remove(); });
+      var list = el.querySelector('.slick-list');
+      if (list) {
+        var track = list.querySelector('.slick-track');
+        if (track) {
+          Array.from(track.children)
+            .filter(function(c) { return !c.classList.contains('slick-cloned'); })
+            .forEach(function(slide) {
+              slide.classList.remove('slick-slide','slick-current','slick-active','slick-visible','slick-cloned');
+              slide.removeAttribute('data-slick-index');
+              slide.removeAttribute('aria-hidden');
+              slide.removeAttribute('tabindex');
+              slide.removeAttribute('role');
+              slide.removeAttribute('aria-describedby');
+              slide.style.width = '';
+              el.appendChild(slide);
+            });
+        }
+        list.remove();
+      }
+    });
+
+    if (!window.jQuery) return;
+
+    // Four-item sliders (Tour Categories + Journey of Excellence)
+    try {
+      jQuery('.four-item-slider').slick({
+        slidesToShow: 4, slidesToScroll: 1, arrows: true, dots: false, infinite: true,
+        responsive: [
+          { breakpoint: 1025, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+          { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+        ]
+      });
+    } catch(e) { console.warn('⚠️ four-item-slider:', e.message); }
+
+    // Three-item slider (A Symphony of Exclusive Experiences)
+    try {
+      jQuery('.three-item-slider').slick({
+        slidesToShow: 3, slidesToScroll: 1, arrows: true, dots: false, infinite: true,
+        responsive: [
+          { breakpoint: 1025, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+          { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+        ]
+      });
+    } catch(e) { console.warn('⚠️ three-item-slider:', e.message); }
+
+    // One-item slider (Real Experiences / Reviews)
+    try {
+      jQuery('.one-item-slider').slick({
+        slidesToShow: 1, slidesToScroll: 1, arrows: true, dots: true, infinite: true,
+        autoplay: true, autoplaySpeed: 4000
+      });
+    } catch(e) { console.warn('⚠️ one-item-slider:', e.message); }
+
+    // Seven-item slider (Accolades and Memberships)
+    try {
+      jQuery('.seven-item-slider').slick({
+        slidesToShow: 7, slidesToScroll: 1, arrows: true, dots: false, infinite: true,
+        autoplay: true, autoplaySpeed: 2000,
+        responsive: [
+          { breakpoint: 1025, settings: { slidesToShow: 4, slidesToScroll: 1 } },
+          { breakpoint: 600, settings: { slidesToShow: 2, slidesToScroll: 1 } }
+        ]
+      });
+    } catch(e) { console.warn('⚠️ seven-item-slider:', e.message); }
+
+    // Hide reviews dots — invisible and non-interactive
+    var dotsStyle = document.createElement('style');
+    dotsStyle.innerHTML = '.one-item-slider .slick-dots { pointer-events: none; opacity: 0; visibility: hidden; }';
+    document.head.appendChild(dotsStyle);
+
+    console.log('✅ patch.js: all sliders reinitialised');
+  }
+
+  // Must run before main.js touches the DOM — use DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', stripAndReinitSliders);
+  } else {
+    stripAndReinitSliders();
+  }
+})();
