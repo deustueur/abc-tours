@@ -3711,7 +3711,75 @@ var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$
   
 
   <script src="./index_files/patch.js"></script>
-<script type="text/javascript" id="main-js-js" data-rocket-defer="" defer="" src="./index_files/main.js.download" data-rocket-status="executed"></script>
+<script id="clean-main-js">
+// === ABC TOURS: Clean UI Engine ===
+jQuery(document).ready(function($) {
+  // Hamburger Menu
+  const hams = document.querySelectorAll('.ham');
+  const hamclose = document.querySelector('.hamclose');
+  const menu = document.querySelector('.main-menu');
+  const overlay = document.querySelector('.menu-overlay');
+
+  function openMenu() {
+    if (!menu || !overlay) return;
+    menu.style.visibility = 'visible';
+    menu.style.opacity = '1';
+    let menuWidth = window.innerWidth < 600 ? '100%' : window.innerWidth < 1025 ? '50%' : '30vw';
+    menu.style.width = menuWidth;
+    overlay.style.opacity = '1';
+    overlay.style.visibility = 'visible';
+    hams.forEach(h => h.classList.add('is-active'));
+    if (hamclose) hamclose.classList.add('is-active');
+  }
+
+  function closeMenu() {
+    if (!menu || !overlay) return;
+    menu.style.opacity = '0';
+    menu.style.width = '0';
+    setTimeout(() => { menu.style.visibility = 'hidden'; }, 300);
+    overlay.style.opacity = '0';
+    overlay.style.visibility = 'hidden';
+    hams.forEach(h => h.classList.remove('is-active'));
+    if (hamclose) hamclose.classList.remove('is-active');
+  }
+
+  hams.forEach(ham => ham.addEventListener('click', openMenu));
+  if (hamclose) hamclose.addEventListener('click', closeMenu);
+  if (overlay) overlay.addEventListener('click', function(e) {
+    if (menu && !menu.contains(e.target)) closeMenu();
+  });
+
+  // Mega Menu
+  const megaMenu = document.querySelector('#walkers-mega-menu');
+  const megaClose = document.querySelector('#mega-close');
+  if (megaMenu) {
+    hams.forEach(ham => ham.addEventListener('click', () => megaMenu.classList.add('active')));
+  }
+  if (megaClose) {
+    megaClose.addEventListener('click', () => {
+      megaMenu.classList.remove('active');
+      hams.forEach(ham => ham.classList.remove('is-active'));
+    });
+  }
+
+  // Search Toggle
+  $('.search-btn').on('click', function() { $('#header').toggleClass('openmenu'); });
+  $('.navbar-toggler').on('click', function() {
+    $('#header, #scroll-toggler, #header-toggler, #scroll-in-toggler').toggleClass('open');
+  });
+
+  // Scroll to Top
+  var scrollTopBtn = document.getElementById('scroll-top');
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+  
+  console.log('✅ Clean main.js: Menus initialized. No Slick, no crashes.');
+});
+</script>
 <script type="text/javascript" id="gsap-js-js" data-rocket-defer="" defer="" src="./index_files/gsap.min.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="scroll-js-js" data-rocket-defer="" defer="" src="./index_files/ScrollTrigger.min.js.download" data-rocket-status="executed"></script>
 <script type="text/javascript" id="fancy-js-js" data-rocket-defer="" defer="" src="./index_files/fancybox.umd.js.download" data-rocket-status="executed"></script>
